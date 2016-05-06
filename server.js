@@ -239,7 +239,7 @@ var request = require('request');
 // ```js
 
 var url = 'http://api.steampowered.com/ISteamUserStats/GetSchemaForGame/' +
-    'v2/'+steamapikey+'&appid=8930';
+    'v2/?key='+steamapikey+'&appid=8930';
 
 // ```
 // 
@@ -259,7 +259,7 @@ var url = 'http://api.steampowered.com/ISteamUserStats/GetSchemaForGame/' +
 app.get('/steam/game/:steamID/gamelist', function(httpRequest, httpResponse) {
     // Calculate the Steam API URL we want to use
     var url = 'http://api.steampowered.com/IPlayerService/GetOwnedGames/' +
-        'v0001/'+steamapikey+'&steamid=' + httpRequest.params.steamID + '&format=json';
+        'v0001/?key='+steamapikey+'&steamid=' + httpRequest.params.steamID + '&format=json';
     request.get(url, function(error, steamHttpResponse, steamHttpBody) {
         httpResponse.setHeader('Content-Type', 'application/json');
         httpResponse.send(steamHttpBody);
@@ -284,7 +284,7 @@ app.get('/steam/game/:steamID/gamelist', function(httpRequest, httpResponse) {
 app.get('/steam/civ5achievements', function(httpRequest, httpResponse) {
     // Calculate the Steam API URL we want to use
     var url = 'http://api.steampowered.com/ISteamUserStats/GetSchemaForGame/' +
-        'v2/'+steamapikey+'&appid=8930';
+        'v2/?key='+steamapikey+'&appid=8930';
     request.get(url, function(error, steamHttpResponse, steamHttpBody) {
         // Once we get the body of the steamHttpResponse, send it to our client
         // as our own httpResponse
@@ -307,7 +307,7 @@ app.get('/steam/civ5achievements', function(httpRequest, httpResponse) {
  
  app.get('/steam/game/:appid/:steamid/achievements', function(httpRequest, httpResponse) {
     // Calculate the Steam API URL we want to use
-    var url = 'http://api.steampowered.com/ISteamUserStats/GetPlayerAchievements/v0001/?appid=' + httpRequest.params.appid + steamapikey + httpRequest.params.steamid;
+    var url = 'http://api.steampowered.com/ISteamUserStats/GetPlayerAchievements/v0001/?appid=' + httpRequest.params.appid +'&key='+ steamapikey + httpRequest.params.steamid;
     request.get(url, function(error, steamHttpResponse, steamHttpBody) {
         httpResponse.setHeader('Content-Type', 'application/json');
         httpResponse.send(steamHttpBody);
@@ -317,7 +317,7 @@ app.get('/steam/civ5achievements', function(httpRequest, httpResponse) {
 app.get('/steam/game/:appid/achievements', function(httpRequest, httpResponse) {
     // Calculate the Steam API URL we want to use
     var url = 'http://api.steampowered.com/ISteamUserStats/GetSchemaForGame/' +
-        'v2/'+steamapikey+'&appid=' +
+        'v2/?key='+steamapikey+'&appid=' +
         httpRequest.params.appid;
     request.get(url, function(error, steamHttpResponse, steamHttpBody) {
         httpResponse.setHeader('Content-Type', 'application/json');
@@ -363,7 +363,7 @@ app.get('/steam/game/AppList/:appids', function(httpRequest, httpResponse) {
 app.get('/steam/game/:steamid/ownedgames', function(httpRequest, httpResponse) {
     // Calculate the Steam API URL we want to use
     var url = 'http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/' +
-        'v0001/'+steamapikey+'&steamid=' +
+        'v0001/?key='+steamapikey+'&steamid=' +
         httpRequest.params.steamid+'&include_appinfo=1&format=json';
     request.get(url, function(error, steamHttpResponse, steamHttpBody) {
         httpResponse.setHeader('Content-Type', 'application/json');
@@ -373,7 +373,7 @@ app.get('/steam/game/:steamid/ownedgames', function(httpRequest, httpResponse) {
 
 app.get('/steam/game/:steamid/:appid/ownedgames', function(httpRequest, httpResponse) {
     // This function gets a steam id, app id and delivers to userhost the appid
-    var url = 'http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/' +
+    var url = 'http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=' +
         steamapikey+'&steamid=' +
         httpRequest.params.steamid+'&include_appinfo=1&format=json';
     request.get(url, function(error, steamHttpResponse, steamHttpBody) {
