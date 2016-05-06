@@ -1,0 +1,70 @@
+body {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+}
+
+header {
+  padding: 20px 0;
+ 
+}
+
+header .row,
+footer .row {
+  display: flex;
+  justify-content: center;
+ 
+  
+}
+
+header h1 {
+  font-weight: 700;
+  margin: 0;
+  
+ 
+}
+
+header nav {
+  
+ 
+}
+
+header p {
+
+}
+
+header input {
+	margin-top: 20px;
+	width: 128px;
+}
+
+.goalbar {
+	
+	margin-top: 0px;
+	display: flex;
+	flex-direction:column;
+	justify-content:center;
+	
+}
+.currentAchivement{
+	justify-content: center;
+}
+#currentGoal {
+	border-bottom: solid 2px;
+	border-bottom-color: black;
+}
+
+.boton1 {
+	border: 
+	vertical-align: bottom;
+	border-radius: 6px;
+	float: right;
+	display: none;
+}
+
+.hide {
+	display: none;
+}
+
+input {
+	background-color:#D8C0C0;
+}
