@@ -35,6 +35,7 @@ $(document).ready(function(){
 			url: "/steam/game/"+userobject.userSteamIDnumber+"/gamelist",
 			error: function (jqXHR, textStatus, errorThrown) {
 				console.log(jqXHR);
+				$('#belowboxtext').html("Please hit home and insert a valid Steam ID.")
 				
 			},
 			success: function (msg) {		
@@ -229,7 +230,8 @@ $(document).ready(function(){
 							if (msg.items[i].id.kind === "youtube#video"){
 							videourl = msg.items[i].id.videoId
 							$("#playerplace").html(video1 + videourl + video2);
-							console.log(achievements.description);
+							try{
+							console.log(achievements.description);}catch(exception){console.log(exception.message)}
 							}
 						}
 					}
@@ -315,7 +317,7 @@ $(document).ready(function(){
 		$(".btn").css("float","right");
 		$(".btn").css("display","none");
 		$(".boton1").css("display","inline-block");
-		
+		try{
 			var video1="";
 		video1 += "<iframe id=\"player\" type=\"text\/html\" width=\"640\" height=\"390\"";
 		video1 += "  src=\"http:\/\/www.youtube.com\/embed\/";
@@ -574,7 +576,9 @@ $(document).ready(function(){
 						
 				});
 			}
-		});	
+	}); }catch(exception){
+		console.log(exception.message);
+	}	
 	
 	});
 		
