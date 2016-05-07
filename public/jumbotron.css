@@ -2,6 +2,7 @@
 body {
   padding-top: 20px;
   padding-bottom: 20px;
+  background-color: #f2f2f2;
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
@@ -14,7 +15,7 @@ body {
 
 /* Custom page header */
 .header {
-  padding-bottom: 20px;
+  padding-bottom: 00px;
   border-bottom: 1px solid #e5e5e5;
 }
 /* Make the masthead heading the same height as the navigation */
@@ -35,6 +36,7 @@ body {
 @media (min-width: 768px) {
   .container {
     max-width: 730px;
+	margin-botom: 0px;
   }
 }
 .container-narrow > hr {
@@ -43,6 +45,7 @@ body {
 
 /* Main marketing message and sign up button */
 .jumbotron {
+	margin-top:40px;
   text-align: center;
   border-bottom: 1px solid #e5e5e5;
  
@@ -50,7 +53,8 @@ body {
 .jumbotron .btn {
   padding: 14px 24px;
   font-size: 21px;
-}
+  float: none;
+  }
 
 /* Supporting marketing content */
 .marketing {
@@ -82,4 +86,8 @@ body {
 #belowboxtext {
 	padding-top: 10px
 }
+
+.wrapper-top10{
+	margin-botom: 30px
 }
+

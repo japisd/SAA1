@@ -1,7 +1,7 @@
 function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
-var myRegExp = /Valve|Untitled|Super Secret Project|\=/;
+var myRegExp = /Valve|Untitled|Super Secret Project|\=|undefined/;
 function regexpfilter(regex,stri){
 	if (regex.test(stri) === true) {return " / "}
 	else {return stri}
@@ -10,8 +10,7 @@ console.log(regexpfilter(myRegExp,"Valve"))
 var removeunder = function(stri){
 	return stri.replace(/[_-]/g, " ");
 }
-var teststring = "que_loco"
-console.log(removeunder(teststring));
+
 
 userobject = {};
 
@@ -35,7 +34,7 @@ $(document).ready(function(){
 			data: {},
 			url: "/steam/game/"+userobject.userSteamIDnumber+"/gamelist",
 			error: function (jqXHR, textStatus, errorThrown) {
-				alert(jqXHR);
+				console.log(jqXHR);
 				
 			},
 			success: function (msg) {		
@@ -51,7 +50,7 @@ $(document).ready(function(){
 					data: {},
 					url: "/steam/game/"+userobject.appid+"/achievements",
 					error: function (jqXHR, textStatus, errorThrown) {
-						alert(jqXHR);
+						console.log(jqXHR);
 						
 					},
 					success: function (msg) {				
@@ -74,7 +73,7 @@ $(document).ready(function(){
 								data: {},
 								url: "/steam/game/AppList/"+userobject.appid,
 								error: function (jqXHR, textStatus, errorThrown) {
-									alert(jqXHR);
+									console.log(jqXHR);
 									
 								},
 								success: function (msg1) {
@@ -90,13 +89,15 @@ $(document).ready(function(){
 						
 						
 				});
+				var backgroundimageurl = "url('https://steamcdn-a.akamaihd.net/steam/apps/" + userobject.appid + "/page_bg_generated_v6b.jpg')";
+				$(".wrapper-top10").css("background-image",backgroundimageurl);
 				$.ajax({
 					type: 'GET',
 					dataType: 'json',
 					data: {},
 					url: '/steam/game/' + userobject.appid + '/' + userobject.userSteamIDnumber + '/achievements',
 					error: function (jqXHR, textStatus, errorThrown) {
-									alert(jqXHR);
+									console.log(jqXHR);
 					},
 					success: function(msg){
 						try{
@@ -117,7 +118,7 @@ $(document).ready(function(){
 						data: {},
 						url: '/steam/game/' + userobject.appid + '/achievements',
 						error: function (jqXHR, textStatus, errorThrown) {
-										alert(jqXHR,"this");
+										console.log(jqXHR,"this");
 						},
 						success: function(msg){
 							try{
@@ -138,9 +139,9 @@ $(document).ready(function(){
 								
 								}
 							}
-							console.log("right before youtubesearch");
+							
 							if (achievements.description != undefined){
-								console.log("achievement description is not undefined");
+								
 								// YOUTUBE SEARCH
 						$.ajax({
 						type: 'GET',
@@ -151,7 +152,7 @@ $(document).ready(function(){
 										console.log(userobject.userSteamIDnumber + ' ' + userobject.appid )
 										console.log('youtube/'+regexpfilter(myRegExp,removeunder(userobject.achievement.apiname))+'/ '+regexpfilter(myRegExp,userobject.randomgamename))
 										console.log(regexpfilter(myRegExp,removeunder(userobject.achievement.apiname)),regexpfilter(myRegExp,userobject.randomgamename))
-										alert('errorz');
+										console.log('errorz');
 										console.log(userobject.randomgamename)
 						},
 					success: function(msg){
@@ -161,7 +162,7 @@ $(document).ready(function(){
 						for (i=0;i<msg.items.length;i++){
 							if (msg.items[i].id.kind === "youtube#video"){
 							videourl = msg.items[i].id.videoId
-							console.log(videourl);
+							
 							$("#playerplace").html(video1 + videourl + video2);
 							
 							}
@@ -179,13 +180,13 @@ $(document).ready(function(){
 								url: 'youtube/ /' + userobject.randomgamename,
 								error: function (jqXHR, textStatus, errorThrown) {
 													console.log(userobject.userSteamIDnumber + ' ' + userobject.appid )
-													alert('errorz');
+													console.log('errorz');
 									},
 								success: function(msg){
 									for (i=0;i<msg.items.length;i++){
 										if (msg.items[i].id.kind === "youtube#video"){
 										videourl = msg.items[i].id.videoId
-										console.log(videourl);
+										
 										$("#playerplace").html(video1 + videourl + video2);
 										
 										}
@@ -209,7 +210,7 @@ $(document).ready(function(){
 						},
 					success: function(msg){
 						userobject.gameimagelogourl = "http://media.steampowered.com/steamcommunity/public/images/apps/" + userobject.appid + "/" + msg.img_logo_url + '.jpg';
-						$('#gamelogo').html('<img ' + 'title="' + userobject.gameName + '"' + 'id="gamelogo" src=' + userobject.gameimagelogourl + ">" );
+						$('#gamelogo').html('<img ' + 'title="' + regexpfilter(myRegExp,userobject.gameName) + '"' + 'id="gamelogo" src=' + userobject.gameimagelogourl + ">" );
 											
 						
 						try{
@@ -220,14 +221,14 @@ $(document).ready(function(){
 					url: 'youtube/'+userobject.achievement.apiname+'/ '+userobject.randomgamename,
 					error: function (jqXHR, textStatus, errorThrown) {
 										console.log(userobject.userSteamIDnumber + ' ' + userobject.appid )
-										alert('errorz1');
+										console.log('errorz1');
 						},
 					success: function(msg){
 						for (i=0;i<msg.items.length;i++){
 							if (msg.items[i].id.kind === "youtube#video"){
 							videourl = msg.items[i].id.videoId
 							$("#playerplace").html(video1 + videourl + video2);
-							alert(achievements.description);
+							console.log(achievements.description);
 							}
 						}
 					}
@@ -251,16 +252,16 @@ $(document).ready(function(){
 							videourl = msg.items[i].id.videoId
 							$("#playerplace").html(video1 + videourl + video2);
 						console.log(userobject.gameName + "before")
-						$('#gamelogo').html('<img ' + 'title="' + userobject.gameName + '"' + 'id="gamelogo" src=' + userobject.gameimagelogourl + ">" );
-						$('#currentGame').html('<img ' + 'title="' + userobject.randomgamename + '"' + 'id="gamelogo" src=' + userobject.gameimagelogourl + ">" );
+						$('#gamelogo').html('<img ' + 'title="' + regexpfilter(myRegExp,userobject.gameName) + '"' + 'id="gamelogo" src=' + userobject.gameimagelogourl + ">" );
+						$('#currentGame').html('<img ' + 'title="' + regexpfilter(myRegExp,userobject.randomgamename) + '"' + 'id="gamelogo" src=' + userobject.gameimagelogourl + ">" );
 						$('#currentGame img').css("marginLeft","0");
 						$('#currentGame img').css("width","100%");
 						console.log("we got here" + userobject.gameName + userobject.randomgamename + userobject.appid + videourl)
-						$('#gamelogo').html('<img ' + 'title="' + userobject.randomgamename + '"' + 'id="gamelogo" src=' + userobject.gameimagelogourl + ">" );
+						$('#gamelogo').html('<img ' + 'title="' + regexpfilter(myRegExp,userobject.randomgamename) + '"' + 'id="gamelogo" src=' + userobject.gameimagelogourl + ">" );
 						if (myRegExp.test(userobject.randomgamename)){
 						$('boton2').click;}
 						try{
-						alert(achievements.description);
+						console.log(achievements.description);
 						} catch(exception){ console.log(exception.message)}
 							}
 						}
@@ -281,7 +282,7 @@ $(document).ready(function(){
 
 
 			var video1="";
-		video1 += "<iframe id=\"player\" type=\"text\/html\" width=\"640\" height=\"390\"";
+		video1 += "<iframe class=videoframe style= id=\"player\" type=\"text\/html\" width=\"640\" height=\"390\"";
 		video1 += "  src=\"http:\/\/www.youtube.com\/embed\/";
 
 		var video2="";
@@ -330,7 +331,7 @@ $(document).ready(function(){
 			data: {},
 			url: "/steam/game/"+userobject.userSteamIDnumber+"/gamelist",
 			error: function (jqXHR, textStatus, errorThrown) {
-				alert(jqXHR);
+				console.log(jqXHR);
 				
 			},
 			success: function (msg) {		
@@ -346,7 +347,7 @@ $(document).ready(function(){
 					data: {},
 					url: "/steam/game/"+userobject.appid+"/achievements",
 					error: function (jqXHR, textStatus, errorThrown) {
-						alert(jqXHR);
+						console.log(jqXHR);
 						
 					},
 					success: function (msg) {				
@@ -369,7 +370,7 @@ $(document).ready(function(){
 								data: {},
 								url: "/steam/game/AppList/"+userobject.appid,
 								error: function (jqXHR, textStatus, errorThrown) {
-									alert(jqXHR);
+									console.log(jqXHR);
 									
 								},
 								success: function (msg1) {
@@ -385,13 +386,15 @@ $(document).ready(function(){
 						
 						
 				});
+				var backgroundimageurl = "url('https://steamcdn-a.akamaihd.net/steam/apps/" + userobject.appid + "/page_bg_generated_v6b.jpg')";
+				$(".wrapper-top10").css("background-image",backgroundimageurl);
 				$.ajax({
 					type: 'GET',
 					dataType: 'json',
 					data: {},
 					url: '/steam/game/' + userobject.appid + '/' + userobject.userSteamIDnumber + '/achievements',
 					error: function (jqXHR, textStatus, errorThrown) {
-									alert('loca');
+									console.log('loca');
 					},
 					success: function(msg){
 						try{
@@ -413,7 +416,7 @@ $(document).ready(function(){
 						data: {},
 						url: '/steam/game/' + userobject.appid + '/achievements',
 						error: function (jqXHR, textStatus, errorThrown) {
-										alert(jqXHR,"this");
+										console.log(jqXHR,"this");
 						},
 						success: function(msg){
 							try {
@@ -434,9 +437,9 @@ $(document).ready(function(){
 								
 								}
 							}
-							console.log("right before youtubesearch");
+							
 							if (achievements.description != undefined){
-								console.log("achievement description is not undefined");
+								
 								// YOUTUBE SEARCH
 						$.ajax({
 						type: 'GET',
@@ -447,7 +450,7 @@ $(document).ready(function(){
 										console.log(userobject.userSteamIDnumber + ' ' + userobject.appid )
 										console.log('youtube/'+regexpfilter(myRegExp,removeunder(userobject.achievement.apiname))+'/ '+regexpfilter(myRegExp,userobject.randomgamename))
 										console.log(regexpfilter(myRegExp,removeunder(userobject.achievement.apiname)),regexpfilter(myRegExp,userobject.randomgamename))
-										alert('errorz');
+										console.log('errorz');
 										console.log(userobject.randomgamename)
 						},
 					success: function(msg){
@@ -457,7 +460,7 @@ $(document).ready(function(){
 						for (i=0;i<msg.items.length;i++){
 							if (msg.items[i].id.kind === "youtube#video"){
 							videourl = msg.items[i].id.videoId
-							console.log(videourl);
+							
 							$("#playerplace").html(video1 + videourl + video2);
 							
 							}
@@ -475,13 +478,13 @@ $(document).ready(function(){
 								url: 'youtube/ /' + userobject.randomgamename,
 								error: function (jqXHR, textStatus, errorThrown) {
 													console.log(userobject.userSteamIDnumber + ' ' + userobject.appid )
-													alert('errorz');
+													console.log('errorz');
 									},
 								success: function(msg){
 									for (i=0;i<msg.items.length;i++){
 										if (msg.items[i].id.kind === "youtube#video"){
 										videourl = msg.items[i].id.videoId
-										console.log(videourl);
+										
 										$("#playerplace").html(video1 + videourl + video2);
 										
 										}
@@ -504,11 +507,11 @@ $(document).ready(function(){
 						},
 					success: function(msg){
 						userobject.gameimagelogourl = "http://media.steampowered.com/steamcommunity/public/images/apps/" + userobject.appid + "/" + msg.img_logo_url + '.jpg';
-						$('#gamelogo').html('<img ' + 'title="' + userobject.gameName + '"' + 'id="gamelogo" src=' + userobject.gameimagelogourl + ">" );
-						$('#currentGame').html('<img ' + 'title="' + userobject.randomgamename + '"' + 'id="gamelogo" src=' + userobject.gameimagelogourl + ">" );
+						$('#gamelogo').html('<img ' + 'title="' + regexpfilter(myRegExp,userobject.gameName) + '"' + 'id="gamelogo" src=' + userobject.gameimagelogourl + ">" );
+						$('#currentGame').html('<img ' + 'title="' + regexpfilter(myRegExp,userobject.randomgamename) + '"' + 'id="gamelogo" src=' + userobject.gameimagelogourl + ">" );
 						$('#currentGame img').css("marginLeft","0");
 						$('#currentGame img').css("width","100%");
-						$('#gamelogo').html('<img ' + 'title="' + userobject.randomgamename + '"' + 'id="gamelogo" src=' + userobject.gameimagelogourl + ">" );
+						$('#gamelogo').html('<img ' + 'title="' + regexpfilter(myRegExp,userobject.randomgamename)+ '"' + 'id="gamelogo" src=' + userobject.gameimagelogourl + ">" );
 						if (myRegExp.test(userobject.randomgamename)){
 							$('boton2').click;
 						}
@@ -520,7 +523,7 @@ $(document).ready(function(){
 					url: 'youtube/'+removeunder(userobject.achievement.apiname)+'/ '+userobject.randomgamename,
 					error: function (jqXHR, textStatus, errorThrown) {
 										console.log(userobject.userSteamIDnumber + ' ' + userobject.appid )
-										alert('errorz1');
+										console.log('errorz1');
 						},
 					success: function(msg){
 						for (i=0;i<msg.items.length;i++){
@@ -549,7 +552,7 @@ $(document).ready(function(){
 						},
 					success: function(msg){
 						console.log(msg);
-						console.log(userobject.randomgamename)
+						console.log(userobject.randomgamename," AppID:",userobject.appid)
 						for (i=0;i<msg.items.length;i++){
 							if (msg.items[i].id.kind === "youtube#video"){
 							videourl = msg.items[i].id.videoId

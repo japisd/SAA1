@@ -130,12 +130,16 @@
 
 var express = require('express');
 
-var youtubeapikey = ""
+
+var apikeys = require('./apikeys.js');
+console.log(apikeys.youtubeapikey);
+console.log(apikeys.steamapikey);
+var youtubeapikey = apikeys.youtubeapikey;
 var YouTube = require('youtube-node');
 var youTube = new YouTube();
-var steamapikey = "";
-youTube.setKey();
-
+var steamapikey = apikeys.steamapikey;
+console.log(steamapikey + ":steamapikey")
+youTube.setKey(youtubeapikey);
 
 // ```
 // 
@@ -307,7 +311,7 @@ app.get('/steam/civ5achievements', function(httpRequest, httpResponse) {
  
  app.get('/steam/game/:appid/:steamid/achievements', function(httpRequest, httpResponse) {
     // Calculate the Steam API URL we want to use
-    var url = 'http://api.steampowered.com/ISteamUserStats/GetPlayerAchievements/v0001/?appid=' + httpRequest.params.appid +'&key='+ steamapikey + httpRequest.params.steamid;
+    var url = 'http://api.steampowered.com/ISteamUserStats/GetPlayerAchievements/v0001/?appid=' + httpRequest.params.appid +'&key='+ steamapikey + "&steamid=" + httpRequest.params.steamid;
     request.get(url, function(error, steamHttpResponse, steamHttpBody) {
         httpResponse.setHeader('Content-Type', 'application/json');
         httpResponse.send(steamHttpBody);

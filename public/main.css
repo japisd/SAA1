@@ -1,6 +1,7 @@
 body {
   font-family: 'Roboto', sans-serif;
   font-weight: 300;
+  padding-top: 0px;
 }
 
 header {
@@ -68,3 +69,17 @@ header input {
 input {
 	background-color:#D8C0C0;
 }
+
+#playerplace {
+	padding-top: 20px;
+}
+
+.header1 {
+	background-color: #background-color: f2f2f2;);
+	margin-top: 0px;
+}
+
+.adspaceleft {
+	
+}
+

@@ -46,4 +46,9 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
+# Node Modules
 /node_modules
+
+#API keys
+
+apikeys.js
