@@ -91,6 +91,7 @@ $(document).ready(function(){
 				});
 				var backgroundimageurl = "url('https://steamcdn-a.akamaihd.net/steam/apps/" + userobject.appid + "/page_bg_generated_v6b.jpg')";
 				$(".wrapper-top10").css("background-image",backgroundimageurl);
+				$(".wrapper-top10").css("transition","background-image 0.9s ease-in-out");
 				$.ajax({
 					type: 'GET',
 					dataType: 'json',
@@ -388,6 +389,7 @@ $(document).ready(function(){
 				});
 				var backgroundimageurl = "url('https://steamcdn-a.akamaihd.net/steam/apps/" + userobject.appid + "/page_bg_generated_v6b.jpg')";
 				$(".wrapper-top10").css("background-image",backgroundimageurl);
+				$(".wrapper-top10").css("transition","background-image 0.9s ease-in-out");
 				$.ajax({
 					type: 'GET',
 					dataType: 'json',
@@ -578,7 +580,12 @@ $(document).ready(function(){
 		
 	$('.boton2').click(function(){
 		$("#playerplace" ).toggleClass("hide");
-	})	
+	})
+	$('#contact-submit').click(function(){
+		window.location.href= "index2.html";
+		alert("Thanks for your submission.")
+		
+	});
 });	
 	
 	
