@@ -165,9 +165,7 @@ app.use('/static', express.static(__dirname + '/public'));
 // 
 // ```js
 
-app.get('/', function(httpRequest, httpResponse) {
-    httpResponse.send('Hello, World!');
-});
+
 
 // ```
 // 
@@ -182,9 +180,7 @@ app.get('/', function(httpRequest, httpResponse) {
 // 
 // ```js
 
-app.get('/hello-frank', function(httpRequest, httpResponse) {
-    httpResponse.send('Hello, Frank.');
-});
+
 
 // ```
 // 
@@ -199,9 +195,7 @@ app.get('/hello-frank', function(httpRequest, httpResponse) {
 // 
 // ```js
 
-app.post('/hello-frank', function(httpRequest, httpResponse) {
-    httpResponse.send("No, Frank. You're not allowed to post.");
-});
+
 
 // ```
 // 
@@ -220,10 +214,7 @@ app.post('/hello-frank', function(httpRequest, httpResponse) {
 
 
 
-app.get('/hello/:name', function(httpRequest, httpResponse) {
-    var name = httpRequest.params.name;
-    httpResponse.send('Hello, ' + name + '!');
-});
+
 
 // ```
 // 
