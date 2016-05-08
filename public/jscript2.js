@@ -1,7 +1,7 @@
 function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
-var myRegExp = /Valve|Untitled|Super Secret Project|\=|undefined/;
+var myRegExp = /Valve|Untitled|Super Secret Project|\=|undefined|Dota 2 Test/;
 function regexpfilter(regex,stri){
 	if (regex.test(stri) === true) {return " / "}
 	else {return stri}
@@ -10,7 +10,14 @@ console.log(regexpfilter(myRegExp,"Valve"))
 var removeunder = function(stri){
 	return stri.replace(/[_-]/g, " ");
 }
+	var video1="";
+		video1 += "<iframe id=\"player\" type=\"text\/html\" width=\"640\" height=\"390\"";
+		video1 += "  src=\"http:\/\/www.youtube.com\/embed\/";
 
+		var video2="";
+		video2 += "?enablejsapi=1&origin=http:\/\/example.com\"";
+		video2 += "  frameborder=\"0\"><\/iframe>";
+var videourl = []
 
 userobject = {};
 
@@ -56,7 +63,7 @@ $(document).ready(function(){
 					},
 					success: function (msg) {				
 						try {
-							var myRegExp = /Valve|Untitled/;
+							
 							userobject.randomgamename = msg.game.gameName;
 							if (userobject.randomgamename != undefined && ! myRegExp.test(userobject.randomgamename)) {
 								$('.lead').html("<p></p>");
@@ -163,12 +170,16 @@ $(document).ready(function(){
 						console.log("inputs: apiname =" +userobject.achievement.apiname + " " + userobject.randomgamename  )
 						for (i=0;i<msg.items.length;i++){
 							if (msg.items[i].id.kind === "youtube#video"){
-							videourl = msg.items[i].id.videoId
+							videourl.push(msg.items[i].id.videoId)
 							
-							$("#playerplace").html(video1 + videourl + video2);
+							
 							
 							}
 						}
+						if (videourl.length > 0){
+						$("#playerplace").html(video1 + videourl[0] + video2);
+						console.log(videourl.length,"#s of videourls")
+						$('.boton3').css("display","inline-block");}
 					}
 					});
 						} else {
@@ -187,12 +198,14 @@ $(document).ready(function(){
 								success: function(msg){
 									for (i=0;i<msg.items.length;i++){
 										if (msg.items[i].id.kind === "youtube#video"){
-										videourl = msg.items[i].id.videoId
-										
-										$("#playerplace").html(video1 + videourl + video2);
-										
+										videourl.push(msg.items[i].id.videoId)
+																					
 										}
 									}
+									if (videourl.length > 0){
+						$("#playerplace").html(video1 + videourl[0] + video2);
+						console.log(videourl.length,"#s of videourls")
+						$('.boton3').css("display","inline-block");}
 								}
 								});
 							
@@ -228,12 +241,16 @@ $(document).ready(function(){
 					success: function(msg){
 						for (i=0;i<msg.items.length;i++){
 							if (msg.items[i].id.kind === "youtube#video"){
-							videourl = msg.items[i].id.videoId
-							$("#playerplace").html(video1 + videourl + video2);
+							videourl.push(msg.items[i].id.videoId)
+							
 							try{
 							console.log(achievements.description);}catch(exception){console.log(exception.message)}
 							}
 						}
+						if (videourl.length > 0){
+						$("#playerplace").html(video1 + videourl[0] + video2);
+						console.log(videourl.length,"#s of videourls")
+						$('.boton3').css("display","inline-block");}
 					}
 					});
 						}catch(exception) {
@@ -252,8 +269,11 @@ $(document).ready(function(){
 					success: function(msg){
 						for (i=0;i<msg.items.length;i++){
 							if (msg.items[i].id.kind === "youtube#video"){
-							videourl = msg.items[i].id.videoId
-							$("#playerplace").html(video1 + videourl + video2);
+							videourl.push(msg.items[i].id.videoId)
+							
+						
+							}
+						}
 						console.log(userobject.gameName + "before")
 						$('#gamelogo').html('<img ' + 'title="' + regexpfilter(myRegExp,userobject.gameName) + '"' + 'id="gamelogo" src=' + userobject.gameimagelogourl + ">" );
 						$('#currentGame').html('<img ' + 'title="' + regexpfilter(myRegExp,userobject.randomgamename) + '"' + 'id="gamelogo" src=' + userobject.gameimagelogourl + ">" );
@@ -262,12 +282,14 @@ $(document).ready(function(){
 						console.log("we got here" + userobject.gameName + userobject.randomgamename + userobject.appid + videourl)
 						$('#gamelogo').html('<img ' + 'title="' + regexpfilter(myRegExp,userobject.randomgamename) + '"' + 'id="gamelogo" src=' + userobject.gameimagelogourl + ">" );
 						if (myRegExp.test(userobject.randomgamename)){
-						$('boton2').click;}
+						$('boton2').click();}
 						try{
 						console.log(achievements.description);
 						} catch(exception){ console.log(exception.message)}
-							}
-						}
+						if (videourl.length > 0){
+						$("#playerplace").html(video1 + videourl[0] + video2);
+						console.log(videourl.length,"#s of videourls")
+						$('.boton3').css("display","inline-block");}
 					}
 					}); 
 							
@@ -284,14 +306,7 @@ $(document).ready(function(){
 		});
 
 
-			var video1="";
-		video1 += "<iframe class=videoframe style= id=\"player\" type=\"text\/html\" width=\"640\" height=\"390\"";
-		video1 += "  src=\"http:\/\/www.youtube.com\/embed\/";
 
-		var video2="";
-		video2 += "?enablejsapi=1&origin=http:\/\/example.com\"";
-		video2 += "  frameborder=\"0\"><\/iframe>";
-		var videourl="1"
 		
 		
 	
@@ -304,6 +319,9 @@ $(document).ready(function(){
 	});	
 	
 	$('.boton1').click(function(){
+		videoindex = 0
+		videourl = []
+		$('.boton3').val("Next Video")
 		$("#playerplace").html('<div class="col-lg-6" id="playerplace">');
 		$('.boton2').css("display","inline-block");
 		$("#currentAchievement").html('<p id="currentAchievement"></p>');
@@ -318,14 +336,8 @@ $(document).ready(function(){
 		$(".btn").css("display","none");
 		$(".boton1").css("display","inline-block");
 		try{
-			var video1="";
-		video1 += "<iframe id=\"player\" type=\"text\/html\" width=\"640\" height=\"390\"";
-		video1 += "  src=\"http:\/\/www.youtube.com\/embed\/";
-
-		var video2="";
-		video2 += "?enablejsapi=1&origin=http:\/\/example.com\"";
-		video2 += "  frameborder=\"0\"><\/iframe>";
-		var videourl=""
+		
+		
 		$("boton2").css("display","inline-block");
 			
 		$.ajax({
@@ -341,9 +353,12 @@ $(document).ready(function(){
 				userobject.gamelist = msg;
 				userobject.numberofgames = msg.response.games.length;
 				userobject.randomgameindex = getRandomInt(0,userobject.numberofgames);
+				try{
 				userobject.appid = msg.response.games[userobject.randomgameindex].appid;
-				
-		
+				}catch(exception){
+					$('boton1').click();
+					console.log(exception.message);
+				}
 				$.ajax({
 					type: 'GET',
 					dataType: 'json',
@@ -458,17 +473,22 @@ $(document).ready(function(){
 										console.log(userobject.randomgamename)
 						},
 					success: function(msg){
-						console.log("api",regexpfilter(myRegExp,removeunder(userobject.achievement.apiname))+'/ '+regexpfilter(myRegExp,userobject.randomgamename));
-						console.log("msg= " + JSON.stringify(msg));
-						console.log("inputs: apiname =" +userobject.achievement.apiname + " " + userobject.randomgamename  )
+						//console.log("api",regexpfilter(myRegExp,removeunder(userobject.achievement.apiname))+'/ '+regexpfilter(myRegExp,userobject.randomgamename));
+						//console.log("msg= " + JSON.stringify(msg));
+						//console.log("inputs: apiname =" +userobject.achievement.apiname + " " + userobject.randomgamename  )
 						for (i=0;i<msg.items.length;i++){
 							if (msg.items[i].id.kind === "youtube#video"){
-							videourl = msg.items[i].id.videoId
+							videourl.push(msg.items[i].id.videoId)
 							
-							$("#playerplace").html(video1 + videourl + video2);
+							
 							
 							}
 						}
+						if (videourl.length > 0){
+						$("#playerplace").html(video1 + videourl[0] + video2);
+						console.log(videourl.length,"#s of videourls")
+						$('.boton3').css("display","inline-block");}
+						;
 					}
 					});
 						} else {
@@ -487,12 +507,17 @@ $(document).ready(function(){
 								success: function(msg){
 									for (i=0;i<msg.items.length;i++){
 										if (msg.items[i].id.kind === "youtube#video"){
-										videourl = msg.items[i].id.videoId
+										videourl.push(msg.items[i].id.videoId)
 										
-										$("#playerplace").html(video1 + videourl + video2);
+										
 										
 										}
 									}
+									if (videourl.length > 0){
+									$("#playerplace").html(video1 + videourl[0] + video2);
+									console.log(videourl.length,"#s of videourls");
+									$('.boton3').css("display","inline-block")}
+									
 								}
 								});
 							
@@ -517,7 +542,7 @@ $(document).ready(function(){
 						$('#currentGame img').css("width","100%");
 						$('#gamelogo').html('<img ' + 'title="' + regexpfilter(myRegExp,userobject.randomgamename)+ '"' + 'id="gamelogo" src=' + userobject.gameimagelogourl + ">" );
 						if (myRegExp.test(userobject.randomgamename)){
-							$('boton2').click;
+							$('boton2').click();
 						}
 						try{
 						$.ajax({
@@ -532,11 +557,15 @@ $(document).ready(function(){
 					success: function(msg){
 						for (i=0;i<msg.items.length;i++){
 							if (msg.items[i].id.kind === "youtube#video"){
-							videourl = msg.items[i].id.videoId
-							$("#playerplace").html(video1 + videourl + video2);
+							videourl.push(msg.items[i].id.videoId)
+							
 							
 							}
 						}
+						if (videourl.length > 0){
+						$("#playerplace").html(video1 + videourl[0] + video2);
+						console.log(videourl.length,"#s of videourls")
+						$('.boton3').css("display","inline-block");}
 					}
 					});
 						}catch(exception) {
@@ -559,11 +588,15 @@ $(document).ready(function(){
 						console.log(userobject.randomgamename," AppID:",userobject.appid)
 						for (i=0;i<msg.items.length;i++){
 							if (msg.items[i].id.kind === "youtube#video"){
-							videourl = msg.items[i].id.videoId
-							$("#playerplace").html(video1 + videourl + video2);
+							videourl.push(msg.items[i].id.videoId)
 							
+								
 							}
 						}
+						if (videourl.length > 0){
+						$("#playerplace").html(video1 + videourl[0] + video2);
+						console.log(videourl.length,"#s of videourls")
+						$('.boton3').css("display","inline-block");}
 					}
 					}); 
 							
@@ -579,9 +612,11 @@ $(document).ready(function(){
 	}); }catch(exception){
 		console.log(exception.message);
 	}	
-	
+	if (videourl.length == 0){
+		$('.boton3').css("display","none");
+	}
 	});
-		
+	
 	$('.boton2').click(function(){
 		$("#playerplace" ).toggleClass("hide");
 	})
@@ -589,6 +624,14 @@ $(document).ready(function(){
 		window.location.href= "index2.html";
 		alert("Thanks for your submission.")
 		
+	});
+	var videoindex = 0
+	$('.boton3').click(function(){
+		
+		videoindex = videoindex + 1;
+		if (videoindex === (videourl.length)){videoindex = 0};
+		$('.boton3').val(videoindex+1 + "/" + videourl.length)
+		$("#playerplace").html(video1 + videourl[videoindex] + video2);
 	});
 });	
 	
