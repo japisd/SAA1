@@ -3,7 +3,7 @@ function getRandomInt(min, max) {
 }
 var myRegExp = /Valve|Untitled|Super Secret Project|\=|undefined|Dota 2 Test/;
 function regexpfilter(regex,stri){
-	if (regex.test(stri) === true) {return " / "}
+	if (regex.test(stri) === true || stri === undefined) {return " / "}
 	else {return stri}
 } 
 console.log(regexpfilter(myRegExp,"Valve"))
