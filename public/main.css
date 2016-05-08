@@ -85,4 +85,11 @@ input {
 
 .boton3 {
 	display: none;
+	float:left;
+	margin-top: 10px;
+	margin-botoom: 10px;
+}
+
+.ytp-thumbnail-overlay {
+	clear: left;
 }
