@@ -6,7 +6,30 @@ function regexpfilter(regex,stri){
 	if (regex.test(stri) === true || stri === undefined) {return " / "}
 	else {return stri}
 } 
-console.log(regexpfilter(myRegExp,"Valve"))
+
+function getCookieValue(name) {
+	var value = document.cookie;
+	var cookieStartsAt = value.indexOf(" " + name + "=");
+	if (cookieStartsAt == -1) {
+	cookieStartsAt = value.indexOf(name + "=");
+	}
+	if (cookieStartsAt == -1) {
+	value = null;
+	} else {
+		cookieStartsAt = value.indexOf("=", cookieStartsAt) + 1;
+		var cookieEndsAt = value.indexOf(";", cookieStartsAt);
+		if (cookieEndsAt == -1) {
+		cookieEndsAt = value.length;
+		}
+			value = unescape(value.substring(cookieStartsAt,
+			cookieEndsAt));
+		}
+return value;
+}
+
+
+
+
 var removeunder = function(stri){
 	return stri.replace(/[_-]/g, " ");
 }
@@ -21,7 +44,12 @@ var videourl = []
 
 userobject = {};
 
+
+console.log(getCookieValue("steamid"));
 $(document).ready(function(){
+	if (getCookieValue("steamid") != undefined){
+		$('.steamIDnumber').val((getCookieValue("steamid")))
+	};
 	var userobject = {};
 	$('.boton2').css("display","none");
 	
@@ -46,12 +74,12 @@ $(document).ready(function(){
 				$('#belowboxtext').html("Please hit home and insert a valid Steam ID.")
 				
 			},
-			success: function (msg) {		
-				userobject.gamelist = msg;
+			success: function (msg) {
+				try {userobject.gamelist = msg;
 				userobject.numberofgames = msg.response.games.length;
 				userobject.randomgameindex = getRandomInt(0,userobject.numberofgames);
 				userobject.appid = msg.response.games[userobject.randomgameindex].appid;
-				
+				document.cookie =("steamid="+userobject.userSteamIDnumber+";expires=Tue, 28 Dec 2020 00:00:00 GMT; ");
 		
 				$.ajax({
 					type: 'GET',
@@ -95,9 +123,10 @@ $(document).ready(function(){
 							});
 						};
 					}
-						
-						
+					
+				 
 				});
+				console.log(userobject.gamelist);	
 				var backgroundimageurl = "url('https://steamcdn-a.akamaihd.net/steam/apps/" + userobject.appid + "/page_bg_generated_v6b.jpg')";
 				$(".wrapper-top10").css("background-image",backgroundimageurl);
 				$(".wrapper-top10").css("transition","background-image 0.9s ease-in-out");
@@ -304,8 +333,14 @@ $(document).ready(function(){
 					}
 						
 				});
-			}
-		});
+			} catch(exception){
+			console.log(exception.message)
+			$('#belowboxtext').html("Your Steam ID needs to allow public access of achievement data. Hit Home and try again after allowing public access through steam.")
+			}}
+				
+		}
+		
+		);
 
 
 
