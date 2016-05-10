@@ -93,3 +93,11 @@ input {
 .ytp-thumbnail-overlay {
 	clear: left;
 }
+
+.adlist{
+	display:inline-block;
+}
+
+.adbanner{
+	display:inline-block;
+}
