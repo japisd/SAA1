@@ -34,6 +34,7 @@ $(document).ready(function(){
 		$(".btn").css("display","none");
 		$(".boton1").css("display","inline-block");
 		$('.boton2').css("display","inline-block");
+		$('.boton4').css("display","inline-block");
 			
 		$.ajax({
 			type: 'GET',
@@ -100,6 +101,7 @@ $(document).ready(function(){
 				var backgroundimageurl = "url('https://steamcdn-a.akamaihd.net/steam/apps/" + userobject.appid + "/page_bg_generated_v6b.jpg')";
 				$(".wrapper-top10").css("background-image",backgroundimageurl);
 				$(".wrapper-top10").css("transition","background-image 0.9s ease-in-out");
+				$('.boton4').attr("href","steam://run/" + userobject.appid);
 				$.ajax({
 					type: 'GET',
 					dataType: 'json',
@@ -407,6 +409,7 @@ $(document).ready(function(){
 				var backgroundimageurl = "url('https://steamcdn-a.akamaihd.net/steam/apps/" + userobject.appid + "/page_bg_generated_v6b.jpg')";
 				$(".wrapper-top10").css("background-image",backgroundimageurl);
 				$(".wrapper-top10").css("transition","background-image 0.9s ease-in-out");
+				$('.boton4').attr("href","steam://run/" + userobject.appid);
 				$.ajax({
 					type: 'GET',
 					dataType: 'json',

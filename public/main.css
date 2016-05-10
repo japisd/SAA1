@@ -79,6 +79,10 @@ input {
 	margin-top: 0px;
 }
 
+.boton2 {
+	display: none;
+}
+
 .adspaceleft {
 	
 }
@@ -100,4 +104,80 @@ input {
 
 .adbanner{
 	display:inline-block;
+}
+
+.boton4 {
+	border: 
+	vertical-align: bottom;
+	border-radius: 6px;
+	float: right;
+	display: none;
+	margin-right:24px;
+	
+	rgb(76, 174, 76)
+	;
+	rgb(76, 174, 76).btn-success
+	buttonfaceuser agent stylesheetinput[type="button" i], input[type="submit" i], input[type="reset" i], input[type="file" i]::-webkit-file-upload-button, button
+	initialuser agent stylesheetinput
+	border-bottom-left-radius:
+	6px
+	;
+	border-bottom-right-radius:
+	6px
+	;
+	border-bottom-style:
+	outset
+	;
+	border-bottom-width:
+	2px
+	;
+	border-image-outset:
+	0px
+	;
+	border-image-repeat:
+	stretch
+	;
+	border-image-slice:
+	100%
+	;
+	border-image-source:
+	none
+	;
+	border-image-width:
+	1
+	;
+	border-left-color:
+	rgb(76, 174, 76)
+	;
+	border-left-style:
+	outset
+	;
+	border-left-width:
+	2px
+	;
+	border-right-color:
+	rgb(76, 174, 76)
+	;
+	rgb(76, 174, 76).btn-success
+	buttonfaceuser agent stylesheetinput[type="button" i], input[type="submit" i], input[type="reset" i], input[type="file" i]::-webkit-file-upload-button, button
+	initialuser agent stylesheetinput
+	border-right-style:
+	outset
+	;
+	border-right-width:
+	2px
+	;
+	border-top-color:
+	rgb(76, 174, 76)
+	;
+	border-top-left-radius:
+	6px
+	;
+	border-top-right-radius:
+	6px
+	;
+	border-top-style:
+	outset
+	;
+	border-top-width: 2px
 }
