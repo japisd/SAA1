@@ -71,7 +71,10 @@ $(document).ready(function(){
 			url: "/steam/game/"+userobject.userSteamIDnumber+"/gamelist",
 			error: function (jqXHR, textStatus, errorThrown) {
 				console.log(jqXHR);
-				$('#belowboxtext').html("Please hit home and insert a valid Steam ID.")
+				$('#belowboxtext').html("Please try again, inserting a valid Steam ID(with public privacy setting). ");
+				 setTimeout(function(){
+					window.location='index.html';
+						}, 4000);
 				
 			},
 			success: function (msg) {
@@ -335,7 +338,10 @@ $(document).ready(function(){
 				});
 			} catch(exception){
 			console.log(exception.message)
-			$('#belowboxtext').html("Your Steam ID needs to allow public access of achievement data. Hit Home and try again after allowing public access through steam.")
+			$('#belowboxtext').html("Your Steam ID needs to allow public access of achievement data. Try again after allowing public access through steam.")
+			setTimeout(function(){
+					window.location='index.html';
+						}, 4000);
 			}}
 				
 		}
